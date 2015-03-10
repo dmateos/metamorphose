@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310132857) do
+ActiveRecord::Schema.define(version: 20150310150923) do
 
   create_table "flows", force: :cascade do |t|
     t.integer  "connector_type", limit: 4
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20150310132857) do
     t.string   "in_options", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "transforms", force: :cascade do |t|
+    t.integer  "pipe_id",        limit: 4
+    t.integer  "transform_type", limit: 4
+    t.string   "parameters",     limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end

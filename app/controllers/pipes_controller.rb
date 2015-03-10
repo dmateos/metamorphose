@@ -10,13 +10,19 @@ class PipesController < ApplicationController
       flow = Plumber::HttpFlow.new(@pipe.flows.first.parameters)
     end
 
+    @data_original = flow.data
+
+    @pipe.transforms.all.each do |t|
+      transform = Plumber::TransformRegexpReplace.new #need to look this up....
+      transform.transform!(flow, t.parameters)
+    end
+
     if @pipe.pipe_in_xml? && @pipe.pipe_out_json?
       pipe = Plumber::XmlToJsonPipe.new
     else
       pipe = Plumber::DummyPipe.new
     end
 
-    @data_original = flow.data
     pipe.translate!(flow)
     @data = flow.data
   end

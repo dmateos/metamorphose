@@ -1,5 +1,7 @@
 class Pipe < ActiveRecord::Base
   has_many :flows
+  has_many :transforms
+
   enum in_type: [ :pipe_in_xml, :pipe_in_json, :pipe_in_csv ]
   enum out_type: [ :pipe_out_json, :pipe_out_unmod ]
 

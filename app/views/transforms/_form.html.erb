@@ -1,0 +1,45 @@
+<%= form_for @transform, :html => { :class => "form-horizontal transform" } do |f| %>
+
+    <% if @transform.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@transform.errors.count, "error") %> prohibited this transform from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @transform.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :pipe_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :pipe_id, Pipe.all.collect {|p| [p.id, p.id] }, {},:class => 'form-control' %>
+    </div>
+    <%= error_span(@transform[:pipe_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :transform_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :transform_type, Transform.transform_types.keys.to_a, {}, :class => 'form-control' %>
+    </div>
+    <%= error_span(@transform[:transform_type]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :parameters, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :parameters, :class => 'form-control' %>
+    </div>
+    <%= error_span(@transform[:parameters]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            transforms_path, :class => 'btn btn-default' %>
+
+<% end %>
