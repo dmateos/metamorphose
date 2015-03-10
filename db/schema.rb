@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308151927) do
+ActiveRecord::Schema.define(version: 20150310132857) do
+
+  create_table "flows", force: :cascade do |t|
+    t.integer  "connector_type", limit: 4
+    t.integer  "pipe_id",        limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "pipes", force: :cascade do |t|
-    t.integer  "in",         limit: 4
     t.integer  "out",        limit: 4
     t.integer  "in_type",    limit: 4
     t.integer  "out_type",   limit: 4

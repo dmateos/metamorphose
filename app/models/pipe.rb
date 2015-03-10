@@ -1,9 +1,7 @@
 class Pipe < ActiveRecord::Base
-  enum in: [ :in_url ]
-  enum in_type: [ :in_xml, :in_json, :in_csv ]
-
-  enum out: [ :out_url ]
-  enum out_type: [ :out_json, :out_unmod ]
+  has_many :flows
+  enum in_type: [ :pipe_in_xml, :pipe_in_json, :pipe_in_csv ]
+  enum out_type: [ :pipe_out_json, :pipe_out_unmod ]
 
   def self.cron
     Pipe.all.each do |p|

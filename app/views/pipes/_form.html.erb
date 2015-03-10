@@ -16,19 +16,6 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :in, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :in, Pipe.ins.keys.to_a, {}, class: 'form-control' %>
-    </div>
-    <%= error_span(@pipe[:in]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :out, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :out, Pipe.outs.keys.to_a, {}, :class => 'form-control' %>
-    </div>
-    <%= error_span(@pipe[:out]) %>
-  </div>
   <div class="control-group">
     <%= f.label :in_type, :class => 'control-label' %>
     <div class="controls">
@@ -42,13 +29,6 @@
       <%= f.select :out_type, Pipe.out_types.keys.to_a, {}, :class => 'form-control' %>
     </div>
     <%= error_span(@pipe[:out_type]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :in_options, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :in_options, :class => 'form-control' %>
-    </div>
-    <%= error_span(@pipe[:in_options]) %>
   </div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
