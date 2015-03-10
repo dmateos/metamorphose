@@ -6,7 +6,19 @@ class PipesController < ApplicationController
   end
 
   def show
+    if @pipe.in_url?
+      flow = Plumber::HttpFlow.new(@pipe.in_options)
+    end
 
+    if @pipe.in_xml? && @pipe.out_json?
+      pipe = Plumber::XmlToJsonPipe.new
+    elsif @pipe.out_unmod?
+      pipe = Plumber::DummyPipe.new
+    end
+
+    @data_original = flow.data
+    pipe.translate!(flow)
+    @data = flow.data
   end
 
   def new
@@ -49,6 +61,6 @@ class PipesController < ApplicationController
   end
 
   def pipe_params
-    params.require(:pipe).permit(:in, :out)
+    params.require(:pipe).permit(:in, :out, :in_type, :out_type, :in_options)
   end
 end

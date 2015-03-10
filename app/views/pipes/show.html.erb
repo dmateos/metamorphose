@@ -8,7 +8,23 @@
   <dd><%= @pipe.in %></dd>
   <dt><strong><%= model_class.human_attribute_name(:out) %>:</strong></dt>
   <dd><%= @pipe.out %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:in_type) %>:</strong></dt>
+  <dd><%= @pipe.in_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:out_type) %>:</strong></dt>
+  <dd><%= @pipe.out_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:in_options) %>:</strong></dt>
+  <dd><%= @pipe.in_options %></dd>
 </dl>
+
+<h3> In Sample </h3>
+<pre>
+  <%= @data_original[0..1000] %>
+</pre>
+
+<h3> Out Sample </h3>
+<pre>
+  <%= @data[0..1000] %>
+</pre>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               pipes_path, :class => 'btn btn-default'  %>

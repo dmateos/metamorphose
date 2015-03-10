@@ -14,8 +14,11 @@
 ActiveRecord::Schema.define(version: 20150308151927) do
 
   create_table "pipes", force: :cascade do |t|
-    t.string   "in",         limit: 255
-    t.string   "out",        limit: 255
+    t.integer  "in",         limit: 4
+    t.integer  "out",        limit: 4
+    t.integer  "in_type",    limit: 4
+    t.integer  "out_type",   limit: 4
+    t.string   "in_options", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

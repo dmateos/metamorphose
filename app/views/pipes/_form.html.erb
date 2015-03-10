@@ -18,18 +18,38 @@
   <div class="control-group">
     <%= f.label :in, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :in, :class => 'form-control' %>
+      <%= f.select :in, Pipe.ins.keys.to_a, {}, class: 'form-control' %>
     </div>
     <%= error_span(@pipe[:in]) %>
   </div>
   <div class="control-group">
     <%= f.label :out, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :out, :class => 'form-control' %>
+      <%= f.select :out, Pipe.outs.keys.to_a, {}, :class => 'form-control' %>
     </div>
     <%= error_span(@pipe[:out]) %>
   </div>
-
+  <div class="control-group">
+    <%= f.label :in_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :in_type, Pipe.in_types.keys.to_a, {}, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pipe[:in_type]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :out_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :out_type, Pipe.out_types.keys.to_a, {}, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pipe[:out_type]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :in_options, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :in_options, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pipe[:in_options]) %>
+  </div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
