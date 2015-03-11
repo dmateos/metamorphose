@@ -16,16 +16,16 @@
   <tbody>
     <% @flows.each do |flow| %>
       <tr>
-        <td><%= link_to flow.id, flow_path(flow) %></td>
+        <td><%= link_to flow.id, pipe_flow_path(@pipe, flow) %></td>
         <td><%= flow.connector_type %></td>
         <td><%= flow.pipe_id %></td>
         <td><%= flow.parameters %> </td>
         <td><%=l flow.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_flow_path(flow), :class => 'btn btn-default btn-xs' %>
+                      edit_pipe_flow_path(@pipe, flow), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      flow_path(flow),
+                      pipe_flow_path(@pipe, flow),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
@@ -36,5 +36,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_flow_path,
+            new_pipe_flow_path(@pipe),
             :class => 'btn btn-primary' %>

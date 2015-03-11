@@ -1,4 +1,4 @@
-<%= form_for @flow, :html => { :class => "form-horizontal flow" } do |f| %>
+<%= form_for [@pipe, @flow], :html => { :class => "form-horizontal flow" } do |f| %>
 
     <% if @flow.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -40,6 +40,6 @@
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            flows_path, :class => 'btn btn-default' %>
+            pipe_flows_path(@pipe), :class => 'btn btn-default' %>
 
 <% end %>

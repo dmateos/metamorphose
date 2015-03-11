@@ -2,7 +2,8 @@ class TransformsController < ApplicationController
   before_action :set_transform, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @transforms = Transform.all
+    @pipe = Pipe.find(params[:pipe_id])
+    @transforms = @pipe.transforms.all
   end
 
   def show
@@ -10,15 +11,17 @@ class TransformsController < ApplicationController
   end
 
   def new
-    @transform = Transform.new
+    @pipe = Pipe.find(params[:pipe_id])
+    @transform = @pipe.transforms.all
   end
 
   def create
-    @transform = Transform.new(transform_params)
+    @pipe = Pipe.find(params[:pipe_id])
+    @transform = @pipe.transforms.new(transform_params)
     @transform.save
     respond_to do |format|
-      format.html { redirect_to @transform }
-      format.json { redirect_to @transform }
+      format.html { redirect_to pipe_transform_path(@pipe, @transform) }
+      format.json { redirect_to pipe_transform_path(@pipe, @transform) }
     end
   end
 
@@ -30,22 +33,23 @@ class TransformsController < ApplicationController
     @transform.update(transform_params)
     @transform.save
     respond_to do |format|
-      format.html { redirect_to @transform }
-      format.json { redirect_to @transform }
+      format.html { redirect_to pipe_transform_path(@pipe, @transform) }
+      format.json { redirect_to pipe_transform_path(@pipe, @transform) }
     end
   end
 
   def destroy
     @transform.destroy
     respond_to do |format|
-      format.html { redirect_to transforms_path }
-      format.json { redirect_to transforms_path }
+      format.html { redirect_to pipe_transforms_path(@pipe) }
+      format.json { redirect_to pipe_transforms_path(@pipe) }
     end
   end
 
   private
   def set_transform
-    @transform = Transform.find(params[:id])
+    @pipe = Pipe.find(params[:pipe_id])
+    @transform = @pipe.transforms.find(params[:id])
   end
 
   def transform_params

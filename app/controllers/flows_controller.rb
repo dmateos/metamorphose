@@ -2,7 +2,8 @@ class FlowsController < ApplicationController
   before_action :set_flow, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @flows = Flow.all
+    @pipe = Pipe.find(params[:pipe_id])
+    @flows = @pipe.flows.all
   end
 
   def show
@@ -10,15 +11,17 @@ class FlowsController < ApplicationController
   end
 
   def new
-    @flow = Flow.new
+    @pipe = Pipe.find(params[:pipe_id])
+    @flow = @pipe.flows.new
   end
 
   def create
-    @flow = Flow.new(flow_params)
+    @pipe = Pipe.find(params[:pipe_id])
+    @flow = @pipe.flows.new(flow_params)
     @flow.save
     respond_to do |format|
-      format.html { redirect_to @flow }
-      format.json { redirect_to @flow }
+      format.html { redirect_to pipe_flow_path(@pipe, @flow) }
+      format.json { redirect_to pipe_flow_path(@pipe, @flow) }
     end
   end
 
@@ -29,22 +32,23 @@ class FlowsController < ApplicationController
     @flow.update(flow_params)
     @flow.save
     respond_to do |format|
-      format.html { redirect_to @flow }
-      format.json { redirect_to @flow }
+      format.html { redirect_to pipe_flow_path(@pipe, @flow) }
+      format.json { redirect_to pipe_flow_path(@pipe, @flow) }
     end
   end
 
   def destroy
     @flow.destroy
     respond_to do |format|
-      format.html { redirect_to flows_path }
-      format.json { redirect_to flows_path }
+      format.html { redirect_to pipes_flows_path(@pipe) }
+      format.json { redirect_to pipes_flows_path(@pipe) }
     end
   end
 
   private
   def set_flow
-    @flow = Flow.find(params[:id])
+    @pipe = Pipe.find(params[:pipe_id])
+    @flow = @pipe.flows.find(params[:id])
   end
 
   def flow_params

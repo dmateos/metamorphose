@@ -2,4 +2,24 @@
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-<%= render :partial => 'form' %>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active" role="presentation"> <a href="#pipe-tab" data-toggle="pill">Pipe </a></li>
+  <li role="presentation"> <a href="#flow-tab" data-toggle="pill">Flow </a></li>
+  <li role="presentation"> <a href="#transform-tab" data-toggle="pill">Transform </a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="pipe-tab">
+    <%= render :partial => 'form' %>
+  </div>
+
+  <div class="tab-pane" id="flow-tab">
+    <%= render :partial => '/flows/form' %>
+  </div>
+
+  <div class="tab-pane" id="transform-tab">
+    <%= render :partial => '/transforms/form' %>
+  </div>
+</div>
+
