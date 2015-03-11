@@ -15,11 +15,17 @@
   </div>
 
   <div class="tab-pane" id="flow-tab">
-    <%= render :partial => '/flows/form' %>
+    <% @flows.each do |flow| %>
+      <%= render :partial => '/flows/form', locals: { flow: flow } %>
+    <% end %>
+    <%= link_to "new", new_pipe_flow_path(@pipe), class: "btn btn-default" %>
   </div>
 
   <div class="tab-pane" id="transform-tab">
-    <%= render :partial => '/transforms/form' %>
+    <% @transforms.each do |transform| %>
+      <%= render :partial => '/transforms/form', locals: { transform: transform } %>
+    <% end %>
+    <%= link_to "new", new_pipe_transform_path(@pipe), class: "btn btn-default" %>
   </div>
 </div>
 

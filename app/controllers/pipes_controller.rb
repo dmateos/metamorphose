@@ -41,8 +41,8 @@ class PipesController < ApplicationController
   end
 
   def edit
-    @flow = @pipe.flows.first
-    @transform = @pipe.transforms.first
+    @flows = @pipe.flows
+    @transforms = @pipe.transforms
   end
 
   def update

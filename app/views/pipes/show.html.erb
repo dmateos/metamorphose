@@ -10,6 +10,26 @@
   <dd><%= @pipe.out_type %></dd>
 </dl>
 
+<h3> Flows </h3>
+<dl class="dl-horizontal">
+  <% @pipe.flows.each do |flow| %>
+    <dt><strong>Connector type </strong><dt>
+    <dd><%= flow.connector_type %> </dd>
+    <dt><strong>Parameters </strong><dt>
+    <dd><%= flow.parameters %> </dd>
+  <% end %>
+</dl>
+
+<h3> Transforms </h3>
+<dl class="dl-horizontal">
+  <% @pipe.transforms.each do |transform| %>
+    <dt><strong>Transform type </strong><dt>
+    <dd><%= transform.transform_type %> </dd>
+    <dt><strong>Parameters </strong><dt>
+    <dd><%= transform.parameters %> </dd>
+  <% end %>
+</dl>
+
 <h3> Output sample </h3>
 <pre>
   <%= @data[0..300] %>
