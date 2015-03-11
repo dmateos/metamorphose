@@ -45,7 +45,7 @@ class TransformsController < ApplicationController
 
   private
   def set_transform
-    @transform = Transform.where(params[:id])
+    @transform = Transform.find(params[:id])
   end
 
   def transform_params
