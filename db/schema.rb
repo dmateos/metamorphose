@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310150923) do
+ActiveRecord::Schema.define(version: 20150311141821) do
+
+  create_table "endpoints", force: :cascade do |t|
+    t.integer  "flow_id",    limit: 4
+    t.string   "data",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "flows", force: :cascade do |t|
     t.integer  "connector_type", limit: 4

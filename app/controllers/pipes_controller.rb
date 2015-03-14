@@ -6,15 +6,19 @@ class PipesController < ApplicationController
   end
 
   def show
-    if @pipe.flows.first.connector_url?
+    if @pipe.flows.first and @pipe.flows.first.connector_url?
       flow = Plumber::HttpFlow.new(@pipe.flows.first.parameters)
+      @data_original = flow.data
+    elsif @pipe.flows.first and @pipe.flows.first.connector_endpoint?
+      flow = Plumber::EndpointFlow.new(@pipe.flows.first.endpoint.id)
+      @data_original  = flow.data
+    else
+      @data_original = ""
     end
-
-    @data_original = flow.data
 
     @pipe.transforms.all.each do |t|
       transform = Plumber::TransformRegexpReplace.new #need to look this up....
-      transform.transform!(flow, t.parameters)
+      transform.transform!(flow, t.parameters) if flow
     end
 
     if @pipe.pipe_in_xml? && @pipe.pipe_out_json?
@@ -23,8 +27,12 @@ class PipesController < ApplicationController
       pipe = Plumber::DummyPipe.new
     end
 
-    pipe.translate!(flow)
-    @data = flow.data
+    if flow
+      pipe.translate!(flow)
+      @data = flow.data
+    else
+      @data = ""
+    end
   end
 
   def new
