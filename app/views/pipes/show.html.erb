@@ -42,7 +42,7 @@
 </dl>
 
 <h3> Output sample </h3>
-<pre>
+<pre id="refreshable">
   <%= @data[0..300] %>
 </pre>
 
@@ -60,3 +60,25 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+<% if @pipe.flows.first.connector_endpoint? %>
+  <script>
+    $(document).ready(function() {
+      var replaceContent = function() {
+        $.ajax({
+          type: 'GET',
+          url: '/endpoints/2/',
+          dataType: 'json',
+          success : function(data) {
+            $("#refreshable").html(data.data);
+          },
+          error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(textStatus);
+          }
+        });
+      }
+
+      setInterval(replaceContent, 1000);
+    });
+  </script>
+<% end %>
